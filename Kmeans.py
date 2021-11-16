@@ -147,11 +147,11 @@ class Kmeans :
             for i in range(itr):
                 Clusters,centroids = self.Kmeans(data,init_centroids,i)
                 fig, ax = plt.subplots(figsize=(9,6))
-                for ii in range(self.K):
-                    clusteri =  data[np.where(Clusters == ii)]
+                for j in range(self.K):
+                    clusteri =  data[np.where(Clusters == j)]
                     
-                    ax.scatter(clusteri[:,0], clusteri[:,1], s=30, label='Cluster %s'%(ii+1))
-                    ax.scatter(centroids[ii,0],centroids[ii,1], marker="d",color="blue" ,s=120    )
+                    ax.scatter(clusteri[:,0], clusteri[:,1], s=30, label='Cluster %s'%(j+1))
+                    ax.scatter(centroids[j,0],centroids[j,1], marker="d",color="blue" ,s=120    )
 
                   
                 
@@ -165,7 +165,7 @@ class Kmeans :
             
                         
 
-            with imageio.get_writer('mygif.gif', mode='I') as writer:
+            with imageio.get_writer('ClustersPlot.gif', mode='I') as writer:
                 for filename in img:
                     image = imageio.imread(filename)
                     writer.append_data(image)
