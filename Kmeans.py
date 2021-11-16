@@ -1,7 +1,7 @@
 
-import os
+
 from os.path import join,isfile
-from os import listdir
+from os import listdir,remove
 import imageio
 from matplotlib import pyplot as plt
 import numpy as np
@@ -170,7 +170,7 @@ class Kmeans :
                     image = imageio.imread(filename)
                     writer.append_data(image)
             for im in range(itr):
-                os.remove("%s.png"%im)
+                remove("%s.png"%im)
            
             print("\nfile 1\n",Clusters[0:49],"\n_______________\nfile 2\n",Clusters[49:210],"\n_______________\nfile 3\n",Clusters[210:268],"\n______________\nfile 4",Clusters[268:-1])
             return  Clusters
