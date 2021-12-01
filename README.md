@@ -31,7 +31,8 @@ we are ready to run the kmeans
 you can pass euclidean distance or manhattan distance function
 
 let print output 
-```cluster = 
+```
+cluster = 
 [1 1 1 1 0 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 0
  1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
  3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3
@@ -49,6 +50,7 @@ let print output
  [-2.46598582 -0.43026126]]
 ```
 Now we can use the Evaluating function only if pass set of file at beginning 
+
 ```P , R  , F = km.Evaluating(cluster)```
 
 in the end , we can use extractFile function to extract labeled files  
