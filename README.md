@@ -63,7 +63,7 @@ Extra function
 
 Kmeans_Step_by_Step function provide a git image of clustering process , how to use
 
-Clusters= km.Kmeans_Step_by_Step(original_data= data ,measure_distance = km.Euclidean_distance, iteration = 10 )
+```Clusters= km.Kmeans_Step_by_Step(original_data= data ,measure_distance = km.Euclidean_distance, iteration = 10 )```
 
 do not pass pca data the function will be automatically pca data to 2d features.
 
