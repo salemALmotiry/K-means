@@ -15,23 +15,23 @@ The data_hanlder needs five parameters
 
 Now init the centroids to start 
 
-init = km.randomCentroids(data_length= data.shape[0])
+```init = km.randomCentroids(data_length= data.shape[0])```
 
 if you wish to use pca function or l2-norm 
 
-data = clu.pca(data,2) # 2 is the number of features 
+```data = clu.pca(data,2) # 2 is the number of features ```
 
-data = km.l2_norm(data)
+```data = km.l2_norm(data)```
 
 
 we are ready to run the kmeans 
 
-cluster , centroids =  km.Kmeans(data=data,measure_distance=km.Euclidean_distance ,init_centroids=init,iteration=10)
+```cluster , centroids =  km.Kmeans(data=data,measure_distance=km.Euclidean_distance ,init_centroids=init,iteration=10)```
 
 you can pass euclidean distance or manhattan distance function
 
 let print output 
-cluster = 
+```cluster = 
 [1 1 1 1 0 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 0
  1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
  3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3
@@ -47,13 +47,13 @@ cluster =
  [ 0.83905403  2.99469221]
  [ 3.66994304 -1.60863114]
  [-2.46598582 -0.43026126]]
-
+```
 Now we can use the Evaluating function only if pass set of file at beginning 
-P , R  , F = km.Evaluating(cluster)
+```P , R  , F = km.Evaluating(cluster)```
 
 in the end , we can use extractFile function to extract labeled files  
 
-km.extractFile(data,cluster)
+```km.extractFile(data,cluster)```
 
 ___________
 
@@ -67,7 +67,7 @@ do not pass pca data the function will be automatically pca data to 2d features.
 
 
 if you wish to try multi k try this 
-  
+  ```
         km = Kmeans(0)   # init kmeans object with cluster number 
         Fpath = r"clustering-data" # <= relative path , i recommend to use absolute path if there any problem
         P , R, F = [],[],[]
@@ -94,6 +94,7 @@ if you wish to try multi k try this
         plt.xlabel("K")
         plt.legend()
         plt.show()
+        ```
 
 
 
