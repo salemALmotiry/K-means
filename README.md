@@ -1,5 +1,3 @@
-﻿Here's a revised version of the text:
-
 How to Use the KMeans Model
 
 To use the KMeans model, follow these steps:
@@ -27,7 +25,7 @@ data = km.l2_norm(data)  # Use L2-norm to normalize the data
 ```
 Step 6: Finally, run the KMeans algorithm using the KMeans method. This method requires four parameters: data, measure_distance, init_centroids, and iteration. The data parameter is the preprocessed data. The measure_distance parameter specifies the distance metric to be used (Euclidean distance or Manhattan distance). The init_centroids parameter is the initial set of centroids. The iteration parameter specifies the number of iterations to run the algorithm.
 
-cluster, centroids = km.KMeans(data=data, measure_distance=km.Euclidean_distance, init_centroids=init, iteration=10)
+`cluster, centroids = km.KMeans(data=data, measure_distance=km.Euclidean_distance, init_centroids=init, iteration=10)`
 
 Step 7: Print the output.
 
