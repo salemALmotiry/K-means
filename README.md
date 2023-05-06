@@ -1,36 +1,37 @@
-﻿How to ues Kmeans model 
+﻿Here's a revised version of the text:
 
-km = Kmeans(4)   # init kmeans object with cluster number 
+How to Use the KMeans Model
 
-path of set file or one file 
-Fpath = r"clustering-data" # <= relative path , i recommend to use absolute path if there any problem
+To use the KMeans model, follow these steps:
 
-```data = km.data_handler(0,1,-1,' ',Fpath) ```
+Step 1: Initialize the KMeans object with the desired number of clusters, as shown below:
 
-The data_hanlder needs five parameters
-1: mode there is two mode , set of file or one file
-2-3 : if you want to skip some part from file for example , [sa,10,2,2,3]  here we want the numerical data then simply pass [1,-1]
-4: delimiter 
-5 : path
+km = KMeans(4)  # Initialize KMeans object with 4 clusters
 
-Now init the centroids to start 
+Step 2: Specify the path of the data file or set of files. We recommend using an absolute path to avoid any issues.
 
-```init = km.randomCentroids(data_length= data.shape[0])```
+Fpath = r"clustering-data"  # Specify the path of the data file or set of files
 
-if you wish to use pca function or l2-norm 
+Step 3: Use the data_handler method to load and preprocess the data. This method requires five parameters: mode, start_col, end_col, delimiter, and path. The mode parameter specifies whether you are working with a single file or a set of files. The start_col and end_col parameters allow you to specify which columns of the data you want to use. The delimiter parameter specifies the character that separates the columns of the data. Finally, the path parameter specifies the path of the data file or set of files.
 
-```data = clu.pca(data,2) # 2 is the number of features ```
+```data = km.data_handler(mode=0, start_col=1, end_col=-1, delimiter=' ', path=Fpath) ```
 
-```data = km.l2_norm(data)```
+Step 4: Initialize the centroids to start the clustering process using the randomCentroids method.
 
+```init = km.randomCentroids(data_length=data.shape[0])```
 
-we are ready to run the kmeans 
+Step 5: If you want to use PCA or L2-norm to preprocess the data, use the corresponding methods pca or l2_norm.
+```
+data = clu.pca(data, 2)  # Use PCA to reduce the data to 2 dimensions
+data = km.l2_norm(data)  # Use L2-norm to normalize the data
+```
+Step 6: Finally, run the KMeans algorithm using the KMeans method. This method requires four parameters: data, measure_distance, init_centroids, and iteration. The data parameter is the preprocessed data. The measure_distance parameter specifies the distance metric to be used (Euclidean distance or Manhattan distance). The init_centroids parameter is the initial set of centroids. The iteration parameter specifies the number of iterations to run the algorithm.
 
-```cluster , centroids =  km.Kmeans(data=data,measure_distance=km.Euclidean_distance ,init_centroids=init,iteration=10)```
+cluster, centroids = km.KMeans(data=data, measure_distance=km.Euclidean_distance, init_centroids=init, iteration=10)
 
-you can pass euclidean distance or manhattan distance function
+Step 7: Print the output.
 
-let print output 
+print(cluster, centroids)
 ```
 cluster = 
 [1 1 1 1 0 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 0
@@ -49,54 +50,44 @@ cluster =
  [ 3.66994304 -1.60863114]
  [-2.46598582 -0.43026126]]
 ```
-Now we can use the Evaluating function only if pass set of file at beginning 
+Additional Functions for KMeans Model
 
-```P , R  , F = km.Evaluating(cluster)```
+Apart from the basic KMeans functionality, there are some additional functions that you can use:
 
-in the end , we can use extractFile function to extract labeled files  
+Evaluating Function: This function can be used to calculate the precision, recall, and F-score of the clustering results. However, it can only be used if you pass a set of files at the beginning.
+```P, R, F = km.Evaluating(cluster)```
 
-```km.extractFile(data,cluster)```
+ExtractFile Function: This function can be used to extract labeled files from the preprocessed data.
+km.extractFile(data, cluster)
 
-___________
+KMeans_Step_by_Step Function: This function provides a visualization of the clustering process. You can use it as follows:
+`Clusters = km.KMeans_Step_by_Step(original_data=data, measure_distance=km.Euclidean_distance, iteration=10)`
 
-Extra function 
+Note that you should not pass PCA data to this function. It will automatically reduce the data to 2D features using PCA.
 
-Kmeans_Step_by_Step function provide a git image of clustering process , how to use
+Multi-K Function: If you want to try out multiple values of K, you can use the following code:
+```
+km = KMeans(0)  # Initialize KMeans object with 0 clusters
+Fpath = r"clustering-data"  # Specify the path of the data file or set of files
+P, R, F = [], [], []
+data = km.data_handler(0, 1, -1, ' ', Fpath)  # Load and preprocess the data
+data = km.pca(data, 2)  # Use PCA to reduce the data to 2 dimensions
 
-```Clusters= km.Kmeans_Step_by_Step(original_data= data ,measure_distance = km.Euclidean_distance, iteration = 10 )```
+for i in range(1, 10):
+    km.K = i  # Change K for every iteration
+    init = km.randomCentroids(data_length=data.shape[0])  # Initialize the centroids
+    cluster, centroids = km.KMeans(data=data, measure_distance=km.Manhattan_distance, init_centroids=init, iteration=10)  # Run KMeans
+    km.isStillMoving = True  # Reset the "isStillMoving" flag
+    Pi, Ri, Fi = km.Evaluating(cluster)  # Calculate precision, recall, and F-score
+    P.append(Pi)
+    R.append(Ri)
+    F.append(Fi)
 
-do not pass pca data the function will be automatically pca data to 2d features.
-
-
-if you wish to try multi k try this 
-  ```
-        km = Kmeans(0)   # init kmeans object with cluster number 
-        Fpath = r"clustering-data" # <= relative path , i recommend to use absolute path if there any problem
-        P , R, F = [],[],[]
-        data = km.data_handler(0,1,-1,' ',Fpath)
-        data = km.pca(data,2)
-
-        for i in range(1,10):
-            km.K = i # change k evry time 
-            
-            init = km.randomCentroids(data_length= data.shape[0])
-            cluster , centroids = km.Kmeans(data=data,measure_distance=km.Manhattan_distance,init_centroids=init,iteration=10)
-            
-            km.isStillMoving = True # reset the "isStillMoving"
-            Pi , Ri , Fi = km.Evaluating(cluster)
-            P.append(Pi)
-            R.append(Ri)
-            F.append(Fi)
-        
-        plt.plot(P,label= "Precision")
-        plt.plot(R,label= "Recall")
-        plt.plot(F,label= "F-score")
-
-        plt.ylabel("P.R.F")
-        plt.xlabel("K")
-        plt.legend()
-        plt.show()
-        ```
-
-
-
+plt.plot(P, label="Precision")
+plt.plot(R, label="Recall")
+plt.plot(F, label="F-score")
+plt.ylabel("P.R.F")
+plt.xlabel("K")
+plt.legend()
+plt.show()
+```
